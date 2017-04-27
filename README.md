@@ -79,7 +79,8 @@ hijacked.__print__();
 ```
 
 ## TODO
-- [X] `eslint`
-- [X] `travis-ci`
-- [] Code coverage
-- [] More edgcase tests
+- [x] `eslint`
+- [x] `travis-ci`
+- [ ] More fully-featured interface (accessed, inaccessed, unavailable)
+- [ ] More edgcase tests
+- [ ] Code coverage
