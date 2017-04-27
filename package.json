@@ -1,0 +1,21 @@
+{
+  "name": "hackregator",
+  "version": "1.0.0",
+  "description": "Aggregates object get's and set's into a meta object for debugging",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "observe",
+    "watch",
+    "meta",
+    "accessors",
+    "defineproperty"
+  ],
+  "author": "jgriffith",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^19.0.2"
+  }
+}
