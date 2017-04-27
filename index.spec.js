@@ -19,6 +19,17 @@ describe('haccessed', function() {
     expect(hijacked.__print__()).toEqual({});
   });
 
+  it('should log properties that are null and accessed', function() {
+    var original = { id: null };
+    var hijacked = haccessed(original);
+
+    hijacked.id;
+
+    expect(hijacked.__print__()).toEqual({
+      id: null
+    });
+  });
+
   it('should log properties that were re-written', function() {
     var original = { id: 123 };
     var hijacked = haccessed(original);
@@ -27,6 +38,17 @@ describe('haccessed', function() {
 
     expect(hijacked.__print__()).toEqual({
       id: 456
+    });
+  });
+
+  it('should log properties that re-written and assigned to null', function() {
+    var original = { id: 123 };
+    var hijacked = haccessed(original);
+
+    hijacked.id = null;
+
+    expect(hijacked.__print__()).toEqual({
+      id: null
     });
   });
 

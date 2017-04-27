@@ -11,6 +11,10 @@
 }(this, function() {
   var isArray = Array.isArray;
 
+  function isObject(value) {
+    return (value !== null && typeof value === 'object');
+  }
+
   return function haccessed(objOrArray) {
     var cloned = isArray(objOrArray) ? [] : {};
     var accessedAccum = isArray(objOrArray) ? [] : {};
@@ -19,7 +23,7 @@
       objOrArray.hasOwnProperty(key) && (function(key) {
         var value = objOrArray[key];
 
-        var clonedValue = (typeof value === 'object') ?
+        var clonedValue = isObject(value) ?
           haccessed(objOrArray[key]) :
           value;
 
@@ -30,11 +34,12 @@
             return accessedAccum[key] = clonedValue;
           },
           set: function(newValue) {
-            var hijackedNewValue = (typeof newValue === 'object') ?
+            var newValueIsObject = isObject(newValue);
+            var hijackedNewValue = newValueIsObject ?
               haccessed(newValue) :
               newValue;
 
-            return accessedAccum[key] = (typeof newValue === 'object') ?
+            return accessedAccum[key] = newValueIsObject ?
               Object.assign(accessedAccum[key] || hijackedNewValue, hijackedNewValue) :
               hijackedNewValue;
           }
@@ -52,7 +57,7 @@
 
         for (var key in accessedAccum) {
           accessedAccum.hasOwnProperty(key) && (function(key) {
-            if (typeof accessedAccum[key] === 'object') {
+            if (isObject(accessedAccum[key])) {
               accessed[key] = accessedAccum[key].__print__();
             } else {
               accessed[key] = accessedAccum[key];
