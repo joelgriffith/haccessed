@@ -1,11 +1,10 @@
 (function(root, factory) {
-  // AMD.
+  'use strict';
+  /* istanbul ignore next */
   if (typeof define === 'function' && define.amd) {
     define([], factory);
-  // Node.
   } else if (typeof module === 'object' && module.exports) {
     module.exports = factory();
-  // Browser globals (root is window)
   } else {
     root.haccessed = factory();
   }
