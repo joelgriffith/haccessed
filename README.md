@@ -2,6 +2,8 @@
 
 Snoop on your objects and see what they're up to
 
+[![npm version](https://badge.fury.io/js/haccessed.svg)](https://badge.fury.io/js/haccessed)
+
 ## About
 
 Haccessed is a function that "hijacks" an object, clones it, and exposes a "hidden" `__print__` method. This `__print__` method will return the original object filtering out un-accessed properties. It does this by using the `Object.defineProperty` method, which keeps the original object intact whilst monitoring lookups on properties.
