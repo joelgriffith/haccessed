@@ -4,7 +4,8 @@
   "description": "Snoop on your objects and see what they're up to",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint *.js"
   },
   "keywords": [
     "observe",
@@ -16,6 +17,8 @@
   "author": "jgriffith",
   "license": "MIT",
   "devDependencies": {
+    "coveralls": "^2.13.0",
+    "eslint": "^3.19.0",
     "jest": "^19.0.2"
   }
 }

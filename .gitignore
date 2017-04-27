@@ -1,0 +1,22 @@
+# Built files
+coverage
+
+# NPM shiznit
+node_modules
+npm-debug.log
+
+# Mac crap
+.DS_STORE
+
+# Logs
+*.log
+
+# Runtime data
+pids
+tmp
+*.pid
+*.seed
+
+# Vim garbage
+*.swp
+*.swo

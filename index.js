@@ -1,17 +1,16 @@
 (function(root, factory) {
   // AMD.
   if (typeof define === 'function' && define.amd) {
-      define([], factory);
+    define([], factory);
   // Node.
   } else if (typeof module === 'object' && module.exports) {
-      module.exports = factory();
+    module.exports = factory();
   // Browser globals (root is window)
   } else {
     root.haccessed = factory();
   }
-}(this, function () {
+}(this, function() {
   var isArray = Array.isArray;
-  var hidden = {};
 
   return function haccessed(objOrArray) {
     var cloned = isArray(objOrArray) ? [] : {};
@@ -49,7 +48,7 @@
       configurable: false,
       value: function() {
         var accessed = isArray(accessedAccum) ?
-          []:
+          [] :
           {};
 
         for (var key in accessedAccum) {

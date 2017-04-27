@@ -1,27 +1,27 @@
-const haccessed = require('./index');
+var haccessed = require('./index');
 
-describe('haccessed', () => {
-  it('log properties that were accessed', () => {
-    const original = { id: 123 };
-    const hijacked = haccessed(original);
+describe('haccessed', function() {
+  it('log properties that were accessed', function() {
+    var original = { id: 123 };
+    var hijacked = haccessed(original);
 
     hijacked.id;
 
     expect(hijacked.__print__()).toEqual({
-      id: 123,
+      id: 123
     });
   });
 
-  it('should not log properties that were not accessed', () => {
-    const original = { id: 123 };
-    const hijacked = haccessed(original);
+  it('should not log properties that were not accessed', function() {
+    var original = { id: 123 };
+    var hijacked = haccessed(original);
 
     expect(hijacked.__print__()).toEqual({});
   });
 
-  it('should log properties that were re-written', () => {
-    const original = { id: 123 };
-    const hijacked = haccessed(original);
+  it('should log properties that were re-written', function() {
+    var original = { id: 123 };
+    var hijacked = haccessed(original);
 
     hijacked.id = 456;
 
@@ -30,9 +30,9 @@ describe('haccessed', () => {
     });
   });
 
-  it('should log properties that were accessed and re-written', () => {
-    const original = { name: { first: 'joel' } };
-    const hijacked = haccessed(original);
+  it('should log properties that were accessed and re-written', function() {
+    var original = { name: { first: 'joel' } };
+    var hijacked = haccessed(original);
 
     hijacked.name.first;
     hijacked.name = { last: 'griffith' };
@@ -44,9 +44,9 @@ describe('haccessed', () => {
     });
   });
 
-  it('should log deep properties that were re-written', () => {
-    const original = { name: { first: 'joel' } };
-    const hijacked = haccessed(original);
+  it('should log deep properties that were re-written', function() {
+    var original = { name: { first: 'joel' } };
+    var hijacked = haccessed(original);
 
     hijacked.name = { last: 'griffith' };
 
@@ -55,33 +55,33 @@ describe('haccessed', () => {
     });
   });
 
-  it('should log accesses to values that are arrays', () => {
-    const original = { array: [1,2,3] };
-    const hijacked = haccessed(original);
+  it('should log accesses to values that are arrays', function() {
+    var original = { array: [1, 2, 3] };
+    var hijacked = haccessed(original);
 
     hijacked.array;
 
     expect(hijacked.__print__()).toEqual({
-      array: [],
+      array: []
     });
   });
 
-  it('should log accesses to values that are functions', () => {
-    function funguy(){}
+  it('should log accesses to values that are functions', function() {
+    function funguy() {}
 
-    const original = { funguy: funguy };
-    const hijacked = haccessed(original);
+    var original = { funguy: funguy };
+    var hijacked = haccessed(original);
 
     hijacked.funguy();
 
     expect(hijacked.__print__()).toEqual({
-      funguy: funguy,
+      funguy: funguy
     });
   });
 
-  it('should log accesses to nested properties', () => {
-    const original = { id: 123, person: { name: 'joel' } };
-    const hijacked = haccessed(original);
+  it('should log accesses to nested properties', function() {
+    var original = { id: 123, person: { name: 'joel' } };
+    var hijacked = haccessed(original);
 
     hijacked.person.name;
 
@@ -92,9 +92,9 @@ describe('haccessed', () => {
     });
   });
 
-  it('should log accesses to multiple nested properties', () => {
-    const original = { id: 123, person: { first: 'joel', last: 'griffith' } };
-    const hijacked = haccessed(original);
+  it('should log accesses to multiple nested properties', function() {
+    var original = { id: 123, person: { first: 'joel', last: 'griffith' } };
+    var hijacked = haccessed(original);
 
     hijacked.person.first;
     hijacked.person.last;
@@ -107,9 +107,9 @@ describe('haccessed', () => {
     });
   });
 
-  it('should log accesses to object properties in an array', () => {
-    const original = { records: [{ id: 1 }, { id: 2 }] };
-    const hijacked = haccessed(original);
+  it('should log accesses to object properties in an array', function() {
+    var original = { records: [{ id: 1 }, { id: 2 }] };
+    var hijacked = haccessed(original);
 
     hijacked.records[0].id;
 
@@ -118,14 +118,14 @@ describe('haccessed', () => {
     });
   });
 
-  it('should log accesses to multi-dimensional arrays', () => {
-    const board = [
+  it('should log accesses to multi-dimensional arrays', function() {
+    var board = [
       ['o', 'o', 'x'],
       ['o', 'x', 'o'],
       ['x', 'o', 'o']
     ];
-    const original = { currentBoard: board };
-    const hijacked = haccessed(original);
+    var original = { currentBoard: board };
+    var hijacked = haccessed(original);
 
     hijacked.currentBoard[0][2];
 
@@ -134,9 +134,9 @@ describe('haccessed', () => {
     });
   });
 
-  it('should handle complex big \'ol objects and their lookups', () => {
+  it('should handle complex big \'ol objects and their lookups', function() {
     function callMeMaybe() {}
-    const theBigOne = {
+    var theBigOne = {
       id: 1,
       callMe: callMeMaybe,
       person: {
@@ -145,12 +145,12 @@ describe('haccessed', () => {
         location: {
           state: 'WA',
           zip: '55555'
-        },
+        }
       },
-      friends: [], // :(
+      friends: [] // :(
     };
 
-    const hijacked = haccessed(theBigOne);
+    var hijacked = haccessed(theBigOne);
 
     hijacked.callMe();
     hijacked.id;
@@ -161,9 +161,9 @@ describe('haccessed', () => {
       id: 1,
       person: {
         location: {
-          zip: '55555',
-        },
-      },
+          zip: '55555'
+        }
+      }
     });
   });
 });
