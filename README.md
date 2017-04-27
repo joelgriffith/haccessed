@@ -4,6 +4,7 @@ Snoop on your objects and see what they're up to
 
 [![npm version](https://badge.fury.io/js/haccessed.svg)](https://badge.fury.io/js/haccessed)
 [![Build Status](https://travis-ci.org/joelgriffith/haccessed.svg?branch=master)](https://travis-ci.org/joelgriffith/haccessed)
+[![Coverage Status](https://coveralls.io/repos/github/joelgriffith/haccessed/badge.svg?branch=master)](https://coveralls.io/github/joelgriffith/haccessed?branch=master)
 
 ## About
 
