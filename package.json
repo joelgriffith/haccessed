@@ -1,7 +1,7 @@
 {
-  "name": "hackregator",
+  "name": "haccessed",
   "version": "1.0.0",
-  "description": "Aggregates object get's and set's into a meta object for debugging",
+  "description": "Snoop on your objects and see what they're up to",
   "main": "index.js",
   "scripts": {
     "test": "jest"
