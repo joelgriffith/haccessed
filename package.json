@@ -1,6 +1,6 @@
 {
   "name": "haccessed",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Snoop on your objects and see what they're up to",
   "main": "index.js",
   "scripts": {
