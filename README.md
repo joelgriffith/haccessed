@@ -3,6 +3,7 @@
 Snoop on your objects and see what they're up to
 
 [![npm version](https://badge.fury.io/js/haccessed.svg)](https://badge.fury.io/js/haccessed)
+[![Build Status](https://travis-ci.org/joelgriffith/haccessed.svg?branch=master)](https://travis-ci.org/joelgriffith/haccessed)
 
 ## About
 
@@ -78,7 +79,7 @@ hijacked.__print__();
 ```
 
 ## TODO
-- [] `eslint`
-- [] `travis-ci`
+- [X] `eslint`
+- [X] `travis-ci`
 - [] Code coverage
 - [] More edgcase tests
