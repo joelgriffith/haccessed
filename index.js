@@ -18,6 +18,7 @@
   return function haccessed(objOrArray) {
     var cloned = isArray(objOrArray) ? [] : {};
     var accessedAccum = isArray(objOrArray) ? [] : {};
+    var unAccessedAccum = isArray(objOrArray) ? [] : {};
 
     for (var key in objOrArray) {
       objOrArray.hasOwnProperty(key) && (function(key) {
@@ -27,10 +28,16 @@
           haccessed(objOrArray[key]) :
           value;
 
+        unAccessedAccum[key] = clonedValue;
+
         Object.defineProperty(cloned, key, {
           enumerable: true,
           configurable: true,
           get: function() {
+            if (!isObject(clonedValue)) {
+              delete unAccessedAccum[key];
+            }
+
             return accessedAccum[key] = clonedValue;
           },
           set: function(newValue) {
@@ -38,6 +45,10 @@
             var hijackedNewValue = newValueIsObject ?
               haccessed(newValue) :
               newValue;
+
+            if (!isObject(unAccessedAccum[key]) || newValueIsObject) {
+              delete unAccessedAccum[key];
+            }
 
             return accessedAccum[key] = newValueIsObject ?
               Object.assign(accessedAccum[key] || hijackedNewValue, hijackedNewValue) :
@@ -47,10 +58,10 @@
       })(key);
     }
 
-    Object.defineProperty(cloned, '__print__', {
+    Object.defineProperty(cloned, '__accessed__', {
       enumerable: false,
       configurable: false,
-      value: function() {
+      get: function() {
         var accessed = isArray(accessedAccum) ?
           [] :
           {};
@@ -58,7 +69,7 @@
         for (var key in accessedAccum) {
           accessedAccum.hasOwnProperty(key) && (function(key) {
             if (isObject(accessedAccum[key])) {
-              accessed[key] = accessedAccum[key].__print__();
+              accessed[key] = accessedAccum[key].__accessed__;
             } else {
               accessed[key] = accessedAccum[key];
             }
@@ -66,6 +77,28 @@
         }
 
         return accessed;
+      }
+    });
+
+    Object.defineProperty(cloned, '__unAccessed__', {
+      enumerable: false,
+      configurable: false,
+      get: function() {
+        var unAccessed = isArray(unAccessedAccum) ?
+          [] :
+          {};
+
+        for (var key in unAccessedAccum) {
+          unAccessedAccum.hasOwnProperty(key) && (function(key) {
+            if (isObject(unAccessedAccum[key])) {
+              unAccessed[key] = unAccessedAccum[key].__unAccessed__;
+            } else {
+              unAccessed[key] = unAccessedAccum[key];
+            }
+          })(key);
+        }
+
+        return unAccessed;
       }
     });
 
